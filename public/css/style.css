@@ -1,0 +1,17 @@
+/* common共用 */
+.margin-bottom12 {
+  margin-bottom: 12px;
+}
+
+.margin-bottom16 {
+  margin-bottom: 16px;
+}
+
+/* signup 注册页样式*/
+.sex-select .dropdown-menu{
+  width: 100%;
+}
+.personal-profile{
+  resize: none;
+  outline: none;
+}

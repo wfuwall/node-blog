@@ -4,7 +4,10 @@ const checkNotLogin = require('../middlewares/check').checkNotLogin
 
 // GET /signin 登录页
 router.get('/', checkNotLogin, (req, res) => {
-  res.send('登录页')
+  // 渲染signin名的ejs模板
+  res.render('signin', {
+    
+  })
 })
 
 // POST /signin 登录

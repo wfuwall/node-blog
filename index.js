@@ -4,12 +4,13 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const flash = require('connect-flash')
 const config = require('config-lite')(__dirname)
+const expressFormidable = require('express-formidable')
 const routes = require('./routes')
 const pkg = require('./package')
 const app = express()
 
 // 设置模板引擎的目录和模板引擎为ejs
-app.set('views', path.join(__dirname, 'viewx'))
+app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 // 设置静态文件目录
@@ -31,6 +32,27 @@ app.use(session({
 
 // flash 中间件，用来显示通知（因flash 是基于 session 实现， 所以要放在session中间件之后）
 app.use(flash())
+
+// 处理表单及文件上传的中间件
+app.use(expressFormidable({
+  uploadDir: path.join(__dirname, 'public/img'), // 上传文件目录
+  keepExtensions: true// 保留后缀
+}))
+
+// app.locals 和 res.locals 几乎没有区别，res.render 传入的对象> res.locals 对象 > app.locals 对象
+// 设置模板全局常量
+app.locals.blog = {
+  title: pkg.name,
+  description: pkg.description
+}
+
+// 添加模板必需的三个变量
+app.use((req, res, next) => {
+  res.locals.user = req.session.user
+  res.locals.success = req.flash('success').toString()
+  res.locals.error = req.flash('error').toString()
+  next()
+})
 
 // 路由
 routes(app)

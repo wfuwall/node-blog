@@ -1,5 +1,5 @@
 # node-blog
-使用 Express + MongoDB 搭建多人博客
+使用 Express + MongoDB 搭建多人博客,根据 [N-blog](https://github.com/nswbmw/N-blog) 文档搭建，并做相应的记录和注释
 
 ### 目录
 - config：配置文件目录
@@ -34,6 +34,7 @@
 ### 开发环境的配置
 - node v10.15.3
 - express v4.17.1
+- 前端页面使用 jQuery + Semantic-UI 实现
 
 ### supervisor
 supervisor可以解决每次修改代码保存后，都需要手动重启程序的问题。它会监听当前目录下node和js后缀的文件，当这些文件发生改动时，其会自动重启程序。
